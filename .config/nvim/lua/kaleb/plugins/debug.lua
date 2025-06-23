@@ -27,6 +27,16 @@ return {
     },
     keys = {
         -- Basic debugging keymaps, feel free to change to your liking!
+
+        -- Eval var under cursor
+        {
+            "<leader>?",
+            function()
+                require("dapui").eval(nil, { enter = true })
+            end,
+            desc = "Debug: Evaluate Under Cursor",
+        },
+
         {
             "<F5>",
             function()
@@ -61,6 +71,22 @@ return {
                 require("dap").toggle_breakpoint()
             end,
             desc = "Debug: Toggle Breakpoint",
+        },
+
+        {
+            "<F4>",
+            function()
+                require("dap").step_back()
+            end,
+            desc = "Debug: Step Back",
+        },
+
+        {
+            "<F6>",
+            function()
+                require("dap").restart()
+            end,
+            desc = "Debug: Restart",
         },
 
         -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
@@ -153,6 +179,6 @@ return {
             },
         })
 
-        require("dap-python").setup()
+        require("dap-python").setup("~/.venvs/mason/bin/debugpy-adapter")
     end,
 }
