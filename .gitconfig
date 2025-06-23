@@ -1,0 +1,12 @@
+[http]
+	sslVerify = true
+[user]
+	name = Kaleb Aklilu
+	email = kalebaklilu3@gmail.com
+
+[alias]
+    st = status
+    br = branch
+    hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+    co = checkout
+    ci = commit
