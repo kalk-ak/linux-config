@@ -1,0 +1,4 @@
+indent_type = "Spaces" # Use spaces instead of tabs for indentation. Change to "Tabs" if you prefer tabs.
+
+indent_width = 4       # Set the number of spaces used for each indent level. Change to 2 if you want smaller indents.
+

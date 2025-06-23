@@ -1,0 +1,10 @@
+{
+    "diagnostics.disable": [
+        "missing-fields",
+        "deprecated",
+        "missing-parameter"
+    ],
+    "diagnostics.globals": [
+        "vim"
+    ]
+}
