@@ -1,0 +1,53 @@
+# --- General Behavior ---
+set -g default-terminal "tmux-256color"
+set -sg escape-time 10
+set -g mouse on
+
+# --- Prefix and Keybindings ---
+set -g prefix C-a
+unbind C-b
+bind-key C-a send-prefix
+
+bind r source-file ~/.tmux.conf \; display "Reloaded!"
+
+bind v split-window -h
+bind | split-window -h
+bind - split-window -v
+
+bind -r j resize-pane -D 5
+bind -r k resize-pane -U 5
+bind -r l resize-pane -R 5
+bind -r h resize-pane -L 5
+bind -r m resize-pane -Z
+
+# --- Window and Pane Indexing ---
+set -g base-index 1
+setw -g pane-base-index 1
+
+# --- Visuals ---
+set -g pane-border-lines single
+set -g status-interval 15
+
+# --- Set the bar at the top ---
+set-option -g status-position top
+
+# --- Copy Mode ---
+setw -g mode-keys vi
+bind-key -T copy-mode-vi 'v' send -X begin-selection
+bind-key -T copy-mode-vi 'y' send -X copy-selection
+unbind -T copy-mode-vi MouseDragEnd1Pane
+
+# --- Tmux Plugin Manager (TPM) ---
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'christoomey/vim-tmux-navigator'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @plugin 'catppuccin/tmux' # <-- We are using Tokyo Night again
+
+# --- Plugin Configurations ---
+# For tmux-resurrect and tmux-continuum
+set -g @resurrect-capture-pane-contents 'on'
+set -g @continuum-restore 'on'
+
+# Initialize TPM (keep this line at the very bottom)
+run '~/.tmux/plugins/tpm/tpm'
