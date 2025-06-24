@@ -170,6 +170,23 @@ return {
         dap.listeners.before.event_terminated["dapui_config"] = dapui.close
         dap.listeners.before.event_exited["dapui_config"] = dapui.close
 
+        require("dap").configurations.python = {
+            {
+                type = "python",
+                request = "launch",
+                name = "Launch file",
+                program = "${file}",
+                justMyCode = false, -- <-- ADD THIS LINE
+                pythonPath = function()
+                    local venv = os.getenv("VIRTUAL_ENV")
+                    if venv and venv ~= "" then
+                        return venv .. "/bin/python"
+                    end
+                    return vim.fn.exepath("python")
+                end,
+            },
+        }
+
         -- Install golang specific config
         require("dap-go").setup({
             delve = {
@@ -178,6 +195,24 @@ return {
                 detached = vim.fn.has("win32") == 0,
             },
         })
+
+        -- -- Get the virtual enviroment. If you want to run the debugger to the one in the virtual environments
+        -- require("dap").configurations.python = {
+        --     {
+        --         type = "python",
+        --         request = "launch",
+        --         name = "Launch file",
+        --         program = "${file}",
+        --         justMyCode = true,       -- Allows for jump ins to library function
+        --         pythonPath = function()
+        --             local venv = os.getenv("VIRTUAL_ENV")
+        --             if venv and venv ~= "" then
+        --                 return venv .. "/bin/python"
+        --             end
+        --             return vim.fn.exepath("python")
+        --         end,
+        --     },
+        -- }
 
         require("dap-python").setup("~/.venvs/mason/bin/debugpy-adapter")
     end,
