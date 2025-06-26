@@ -1,3 +1,4 @@
+-- Use neo tree insead
 return {
     "nvim-tree/nvim-tree.lua", -- File explorer sidebar for Neovim
     -- Provides a visual file tree with Git integration and icons. Use <leader>e* to toggle and control it.

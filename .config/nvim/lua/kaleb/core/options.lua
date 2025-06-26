@@ -74,6 +74,11 @@ opt.listchars = {
     nbsp = "␣",
 }
 
+-- Enable spell checking
+vim.opt.spell = true
+-- Set spell checking language(s)
+vim.opt.spelllang = { "en_us" } -- You can add more languages like "es", "fr", etc.
+
 -- Show which line your cursor is on
 opt.cursorline = true
 

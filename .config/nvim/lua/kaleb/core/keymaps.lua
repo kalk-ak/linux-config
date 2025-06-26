@@ -103,7 +103,8 @@ keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window"
 keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 -- Inserts a new line when leader + o is pressed
-vim.keymap.set("n", "<leader>o", "o<esc>", { desc = "insert new line below and stay in normal mode" })
+-- commented because the same thing can be achived with ] + <space>
+--vim.keymap.set("n", "<leader>o", "o<esc>", { desc = "insert new line below and stay in normal mode" })
 
 -- File: ~/.config/nvim/init.lua (or a file required by it)
 

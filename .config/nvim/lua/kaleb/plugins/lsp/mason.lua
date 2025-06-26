@@ -29,7 +29,6 @@ return {
         mason_lspconfig.setup({
             ensure_installed = {
                 -- Web Development
-                "tsserver", -- TypeScript / JavaScript LSP
                 "html", -- HTML LSP
                 "cssls", -- CSS LSP
                 "tailwindcss", -- Tailwind CSS LSP

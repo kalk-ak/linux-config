@@ -19,6 +19,7 @@ return {
 
         -- Installs the debug adapters for you
         "mason-org/mason.nvim",
+        "theHamsta/nvim-dap-virtual-text",
         "jay-babu/mason-nvim-dap.nvim",
 
         -- Add your own debuggers here
@@ -97,6 +98,22 @@ return {
             end,
             desc = "Debug: See last session result.",
         },
+        {
+            "<F10>",
+            function()
+                require("dap").run_to_cursor()
+            end,
+            desc = "Debug: Run to Cursor",
+        },
+
+        -- Jump to the current debugged line/frame
+        {
+            "<leader>dj",
+            function()
+                require("dap").jump_to_current_frame()
+            end,
+            { desc = "DAP: Jump to current frame" },
+        },
     },
     config = function()
         local dap = require("dap")
@@ -142,6 +159,18 @@ return {
             },
         })
 
+        -- Setup nvim-dap-virtual-text
+        require("nvim-dap-virtual-text").setup({
+            -- Shows the variable name followed by its value
+            display_widget = "text",
+
+            -- Display the widget at the end of the line
+            position = "end_of_line",
+
+            -- Prefix to place before the virtual text
+            virt_text_prefix = " ▷ ",
+        })
+
         -- Change breakpoint icons
         vim.api.nvim_set_hl(0, "DapBreak", { fg = "#e51400" })
         vim.api.nvim_set_hl(0, "DapStop", { fg = "#ffcc00" })
@@ -169,23 +198,6 @@ return {
         dap.listeners.after.event_initialized["dapui_config"] = dapui.open
         dap.listeners.before.event_terminated["dapui_config"] = dapui.close
         dap.listeners.before.event_exited["dapui_config"] = dapui.close
-
-        require("dap").configurations.python = {
-            {
-                type = "python",
-                request = "launch",
-                name = "Launch file",
-                program = "${file}",
-                justMyCode = false, -- <-- ADD THIS LINE
-                pythonPath = function()
-                    local venv = os.getenv("VIRTUAL_ENV")
-                    if venv and venv ~= "" then
-                        return venv .. "/bin/python"
-                    end
-                    return vim.fn.exepath("python")
-                end,
-            },
-        }
 
         -- Install golang specific config
         require("dap-go").setup({
